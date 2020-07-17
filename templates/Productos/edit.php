@@ -7,20 +7,20 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
+            <h4 class="heading"><?= __('Opciones') ?></h4>
             <?= $this->Form->postLink(
-                __('Delete'),
+                __('Eliminar'),
                 ['action' => 'delete', $producto->id_producto],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $producto->id_producto), 'class' => 'side-nav-item']
+                ['confirm' => __('Estas seguro de eliminar el producto # {0}?', $producto->nombre_producto), 'class' => 'side-nav-item']
             ) ?>
-            <?= $this->Html->link(__('List Productos'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+            <?= $this->Html->link(__('Volver | Listado de Productos'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>
     <div class="column-responsive column-80">
         <div class="productos form content">
             <?= $this->Form->create($producto) ?>
             <fieldset>
-                <legend><?= __('Edit Producto') ?></legend>
+                <legend><?= __('Editar Producto') ?></legend>
                 <?php
                     echo $this->Form->control('nombre_producto');
                     echo $this->Form->control('precio_unitario_producto');
@@ -28,7 +28,7 @@
                     echo $this->Form->control('created_at');
                 ?>
             </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
+            <?= $this->Form->button(__('Guardar')) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>

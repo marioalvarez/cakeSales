@@ -8,8 +8,8 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('List Facturas'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+            <h4 class="heading"><?= __('Opciones') ?></h4>
+            <?= $this->Html->link(__('Volver | Listado de Facturas'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>
     <div class="column-responsive column-80">
@@ -17,8 +17,7 @@
             <?= $this->Form->create($factura) ?>
             <fieldset>
                 <legend><?= __('Nueva Factura')?></legend>
-                <legend class=""><?= $this->Form->control('created_at');?></legend>
-                
+                <legend class=""><?= $this->Form->control('created_at');?></legend>                
                 <?php
                     echo $this->Form->control('tipo_documento',['options' => $documentos]);
                     echo $this->Form->control('id_cliente',['options' => $clientes]);?>
@@ -94,7 +93,7 @@
                     //echo $this->Form->control('created_at');
                 ?>
              
-            <?= $this->Form->button(__('Crear')) ?>
+            <?= $this->Form->button(__('Crear Factura')) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>

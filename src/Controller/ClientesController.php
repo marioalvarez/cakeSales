@@ -50,13 +50,13 @@ class ClientesController extends AppController
         if ($this->request->is('post')) {
             $cliente = $this->Clientes->patchEntity($cliente, $this->request->getData());
             if ($this->Clientes->save($cliente)) {
-                $this->Flash->success(__('The cliente has been saved.'));
+                $this->Flash->success(__('El cliente fue creado.'));
                 
                 return $this->redirect(array('controller' => 'facturas', 'action' => 'add'));
                 //return $this->redirect($this->referer());
                 //return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The cliente could not be saved. Please, try again.'));
+            $this->Flash->error(__('Ups!, El cliente no pudo ser almacenado. Por favor, intente nuevamente.'));
         }
         $this->set(compact('cliente'));
     }
@@ -76,11 +76,11 @@ class ClientesController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $cliente = $this->Clientes->patchEntity($cliente, $this->request->getData());
             if ($this->Clientes->save($cliente)) {
-                $this->Flash->success(__('The cliente has been saved.'));
+                $this->Flash->success(__('El cliente fue editado'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The cliente could not be saved. Please, try again.'));
+            $this->Flash->error(__('Ups!, El cliente no pudo ser editado. Por favor, intente nuevamente.'));
         }
         $this->set(compact('cliente'));
     }
@@ -97,9 +97,9 @@ class ClientesController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $cliente = $this->Clientes->get($id);
         if ($this->Clientes->delete($cliente)) {
-            $this->Flash->success(__('The cliente has been deleted.'));
+            $this->Flash->success(__('El cliente fue eliminado'));
         } else {
-            $this->Flash->error(__('The cliente could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Ups!, El cliente no pudo ser eliminado. Por favor, intente nuevamente.'));
         }
 
         return $this->redirect(['action' => 'index']);

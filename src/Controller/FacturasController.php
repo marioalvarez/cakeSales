@@ -152,11 +152,11 @@ class FacturasController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $factura = $this->Facturas->patchEntity($factura, $this->request->getData());
             if ($this->Facturas->save($factura)) {
-                $this->Flash->success(__('The factura has been saved.'));
+                $this->Flash->success(__('La Factura se edito con exito.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The factura could not be saved. Please, try again.'));
+            $this->Flash->error(__('Ups!, La Factura no se modifico. Por Favor, intenta nuevamente.'));
         }
         $this->set(compact('factura'));
     }
@@ -173,9 +173,9 @@ class FacturasController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $factura = $this->Facturas->get($id);
         if ($this->Facturas->delete($factura)) {
-            $this->Flash->success(__('The factura has been deleted.'));
+            $this->Flash->success(__('La Factura se elimino con exito.'));
         } else {
-            $this->Flash->error(__('The factura could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Ups!, La Factura no se logro eliminar. Por Favor, intenta nuevamente.'));
         }
 
         return $this->redirect(['action' => 'index']);

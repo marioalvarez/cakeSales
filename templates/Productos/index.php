@@ -28,9 +28,9 @@
                     <td><?= $this->Number->format($producto->costo_producto) ?></td>
                     <td><?= h($producto->created_at) ?></td>
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $producto->id_producto]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $producto->id_producto]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $producto->id_producto], ['confirm' => __('Are you sure you want to delete # {0}?', $producto->id_producto)]) ?>
+                        <?= $this->Html->link(__('Ver'), ['action' => 'view', $producto->id_producto]) ?>
+                      |  <?= $this->Html->link(__('Editar'), ['action' => 'edit', $producto->id_producto]) ?>
+                      |  <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $producto->id_producto], ['confirm' => __('Are you sure you want to delete # {0}?', $producto->id_producto)]) ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>
