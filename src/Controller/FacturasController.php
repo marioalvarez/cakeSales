@@ -28,7 +28,7 @@ class FacturasController extends AppController
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
         $session = $this->getRequest()->getSession();
-
+        
         /*
          * Enable the following component for recommended CakePHP form protection settings.
          * see https://book.cakephp.org/4/en/controllers/components/form-protection.html
@@ -75,40 +75,28 @@ class FacturasController extends AppController
     {   
         $session = $this->getRequest()->getSession();
         $ordenes = [];
-
+        
+        
         #Carga de productos
         $this->loadModel('Productos');
         
         #agrega productos a la orden
-
-       $a=0;
+        
+       
         if ($id != NULL){
-            $data = $this->Productos->get($id, [
+            #traemos los productos
+            $prod = $this->Productos->get($id, [
                 'contain' => [],
             ]);
-            // agrego productos 
-            /*      
-            for ($i=0; $i < 10; $i++) { 
-                $datos[$i][] = $data;
-            }
-            */
-            //$data = $session->read();
-            //$data[] = ('id' -> $id);
-            
-            //$_SESSION['data'][] = $data;
-
-            while ($a <= 10) {
-                $datos[$a][] = $data;
-            
-            
-            
-            $session->write('producto',$datos);
-            
-            
-            #Advierte y Redirige
+            #traemos de la session los productos
+            $data = $session->read('producto');
+            #agregamos el nuevo elemento
+            $data[] = $prod;
+            #enviamos el merge
+            $session->write('producto', $data);
+            #advertimos al usuario
             $this->Flash->success(__('Producto Agregado.')); 
-            $a = $a + 1; 
-            }
+            #volvemos al sitio de origen
             return $this->redirect($this->referer());
         }
 
@@ -179,6 +167,32 @@ class FacturasController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+    
+    /**
+     * Delete method
+     *
+     * @param string|null $keyword.
+     */
+    public function search()
+    {
+        $this->request->allowMethod('ajax');
+        $keyword = $this->request->query('keyword');
+        $this->loadModel('Productos');
+        
+        $query = $this->Productos->find('all',[
+            'conditions' => ['nombre_producto LIKE' => '%'.$keyword.'%'],
+            'order' => ['Productos.id_producto'=>'DESC'],
+            'limit' => 10            
+            ]);
+
+        $this->set('productos', $this->paginate($query));
+        $this->set('_serialize', ['productos']);
+    }
+
+    public function array_push_assoc(array $arrayDatos, array $values)
+    {
+        return $arrayDatos = array_merge($arrayDatos, $values);
     }
 
    

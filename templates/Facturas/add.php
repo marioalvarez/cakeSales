@@ -23,7 +23,10 @@
                     echo $this->Form->control('id_cliente',['options' => $clientes]);?>
                 <a  rel="noopener" href=<?= $this->Url->build(['controller'=>'clientes','action'=>'add']) ?>>Agregar Cliente</a>
             </fieldset>     
-                <h3>Detalle</h3>
+                <h3>Buscar Productos</h3>
+
+                <?= $this->form->control('buscar'); ?>
+
                 <div class="table-content">
                     <table cellpadding="0" cellspacing="0">
                         <thead>
@@ -49,7 +52,7 @@
                 </div>   
                 
                 <h3>Detalle de productos</h3>
-                <div class="table-content">
+                <div class="table-content2">
                     <table cellpadding="0" cellspacing="0">
                         <thead>
                             <tr>
@@ -59,18 +62,17 @@
                                 <th scope="col"></th>
                             </tr>
                         </thead>
-                        <?php echo $ordenes['0']['0']?>                        
+                        <?php //echo $ordenes[0] ?>                        
                         <tbody>
                         <?php if(is_array($ordenes) || is_object($ordenes)){ ?>
                             
-                            <?php foreach ($ordenes as $prod): ?>                                
-                                <tr>
-                                <?php foreach($prod as $fila): ?>
-                                    <td><?= $fila->id_producto ?></td>
-                                    <td><?= $fila->nombre_producto ?></td>
-                                    <td><?= $fila->precio_unitario_producto ?></td>
+                            <?php foreach ($ordenes as $prod): ?>   
+                                <?php //foreach($prod as $fila): ?>
+                                    <td><?= $prod->id_producto ?></td>
+                                    <td><?= $prod->nombre_producto ?></td>
+                                    <td><?= $prod->precio_unitario_producto ?></td>
                                     <td><?=  $this->Form->Control('detalles.0.cantidad_producto'); ?></td>
-                                <?php endforeach; ?> 
+                                <?php //endforeach; ?> 
                                 </tr>                             
                             <?php endforeach; ?> 
                            
@@ -98,6 +100,24 @@
         </div>
     </div>
 </div>
-<pre>
-<?php $_SESSION ?>
-</pre>
+<script>
+    $('document').ready(function(){
+         $('#buscar').keyup(function(){
+            var searchkey = $(this).val();
+            searchProducts( searchkey );
+         });
+
+        function searchProducts( keyword ){
+        var data = keyword;
+        $.ajax({
+                    method: 'get',
+                    url : "<?php echo $this->Url->build( [ 'controller' => 'Facturas', 'action' => 'Search' ] ); ?>",
+                    data: {keyword:data},
+                    success: function( response )
+                    {       
+                       $( '.table-content' ).html(response);
+                    }
+                });
+        };
+    });
+</script>
