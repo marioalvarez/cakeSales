@@ -14,7 +14,7 @@
  * @var \App\View\AppView $this
  */
 
-$cakeDescription = 'CakePHP: the rapid development php framework';
+$cakeDescription = 'SalesCakePHP: powered by MarioAlvarez';
 ?>
 <!DOCTYPE html>
 <html>
@@ -28,6 +28,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->Html->meta('icon') ?>
 
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.js" ></script>
 
     <?= $this->Html->css(['normalize.min', 'milligram.min', 'cake']) ?>
 

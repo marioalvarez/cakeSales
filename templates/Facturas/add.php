@@ -52,7 +52,7 @@
                 </div>   
                 
                 <h3>Detalle de productos</h3>
-                <div class="table-content2">
+                <div class="table-calculable">
                     <table cellpadding="0" cellspacing="0">
                         <thead>
                             <tr>
@@ -65,14 +65,12 @@
                         <?php //echo $ordenes[0] ?>                        
                         <tbody>
                         <?php if(is_array($ordenes) || is_object($ordenes)){ ?>
-                            
-                            <?php foreach ($ordenes as $prod): ?>   
-                                <?php //foreach($prod as $fila): ?>
+                            <?php foreach ($ordenes as $prod): ?>
+                              
                                     <td><?= $prod->id_producto ?></td>
                                     <td><?= $prod->nombre_producto ?></td>
                                     <td><?= $prod->precio_unitario_producto ?></td>
                                     <td><?=  $this->Form->Control('detalles.0.cantidad_producto'); ?></td>
-                                <?php //endforeach; ?> 
                                 </tr>                             
                             <?php endforeach; ?> 
                            
@@ -88,7 +86,7 @@
                 <?php  
                     //echo $this->Form->control('detalles.0.id_producto',['options' => $productos]);
                     //echo $this->Form->Control('detalles.0.cantidad_producto');
-                    echo $this->Form->Control('detalles.0.id_tax',['options' => $taxes]);
+                    echo $this->Form->Control('detalles.id_tax',['options' => $taxes]);
                     echo $this->Form->Control('detalles.0.precio_total');
                     //RESUMEN
                     echo $this->Form->control('total_factura');

@@ -45,6 +45,7 @@ class FacturasController extends AppController
         $session = $this->getRequest()->getSession();
         $facturas = $this->paginate($this->Facturas);
         
+        
         $session->destroy();
 
         $this->set(compact('facturas'));
@@ -119,8 +120,8 @@ class FacturasController extends AppController
         $ordenes = $session->read('producto');
 
         $clientes = $this->Facturas->Clientes->find('list',['limit'=> 200]); 
-        $taxes = $this->Facturas->Taxes->find('list',['limit'=> 200]); 
-        $documentos = $this->Facturas->Documentos->find('list',['limit'=> 200]); 
+        $taxes = $this->Facturas->Taxes->find('list',['conditions' => ['nombre_tax LIKE' => 'IVA']]); 
+        $documentos = $this->Facturas->Documentos->find('list',['conditions' => ['codigo_documento LIKE' => '30']]); 
         $productos = $this->Facturas->Productos->find('list'); 
         $this->set(compact('factura','clientes','documentos','taxes','productos','listaProductos','ordenes'));
     }
@@ -190,10 +191,30 @@ class FacturasController extends AppController
         $this->set('_serialize', ['productos']);
     }
 
+    public function resumen()
+    {
+        $this->request->allowMethod('ajax');
+        $keyword = $this->request->query('keyword');
+        $this->loadModel('Productos');
+        
+        $query = $this->Productos->find('all',[
+            'conditions' => ['nombre_producto LIKE' => '%'.$keyword.'%'],
+            'order' => ['Productos.id_producto'=>'DESC'],
+            'limit' => 10            
+            ]);
+
+        $this->set('productos', $this->paginate($query));
+        $this->set('_serialize', ['productos']);
+    }
+
+    /**
+     * Funcion para unir arragelos
+     *
+     * @param array $arrayOld.
+     * @param array $arrayNew.
+     */
     public function array_push_assoc(array $arrayDatos, array $values)
     {
         return $arrayDatos = array_merge($arrayDatos, $values);
     }
-
-   
 }
