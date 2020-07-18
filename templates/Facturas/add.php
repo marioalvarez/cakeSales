@@ -34,6 +34,7 @@
                                 <th scope="col"><?= $this->Paginator->sort('ID') ?></th>
                                 <th scope="col"><?= $this->Paginator->sort('NOMBRE') ?></th>
                                 <th scope="col"><?= $this->Paginator->sort('PRECIO UNITARIO') ?></th>
+                                
                             </tr>
                         </thead>
                         <tbody>
@@ -60,6 +61,7 @@
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Precio</th>
                                 <th scope="col"></th>
+                                <th scope="col">Total</th>
                             </tr>
                         </thead>
                         <?php //echo $ordenes[0] ?>                        
@@ -71,6 +73,7 @@
                                     <td><?= $prod->nombre_producto ?></td>
                                     <td><?= $prod->precio_unitario_producto ?></td>
                                     <td><?=  $this->Form->Control('detalles.0.cantidad_producto'); ?></td>
+                                    <td>total</td>
                                 </tr>                             
                             <?php endforeach; ?> 
                            
@@ -86,6 +89,9 @@
                 <?php  
                     //echo $this->Form->control('detalles.0.id_producto',['options' => $productos]);
                     //echo $this->Form->Control('detalles.0.cantidad_producto');
+                    echo $this->Form->label('Resumen', 'Resumen');
+                    echo $this->Form->input('email', ['placeholder' => 'Email', 'label' => false]);
+
                     echo $this->Form->Control('detalles.id_tax',['options' => $taxes]);
                     echo $this->Form->Control('detalles.0.precio_total');
                     //RESUMEN
